@@ -1,554 +1,1342 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>.ale{P} | Full Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-    <script src="tailwind.config.js"></script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-gradient {
-                @apply bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent;
-            }
-            .card-hover {
-                @apply transition-all duration-500 hover:scale-105 hover:shadow-xl hover:z-10;
-            }
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-primary via-[#0d2b7a] to-[#1a3a8f] font-sans text-accent overflow-x-hidden">
-    <!-- Animated Background Elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 left-10 w-4 h-4 rounded-full bg-secondary animate-float delay-100"></div>
-        <div class="absolute top-1/3 right-20 w-6 h-6 rounded-full bg-accent opacity-30 animate-float delay-300"></div>
-        <div class="absolute bottom-20 left-1/4 w-8 h-8 rounded-full bg-secondary opacity-20 animate-float delay-500"></div>
+    <link rel="stylesheet" href="styles.css"/>
+    <script>
+      // Inicializar EmailJS con tu public key
+      (function () {
+        emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza con tu public key de EmailJS
+      })();
+    </script>
+    <script type="module" src="tailwind.config.js"></script>
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-sans text-text-light overflow-x-hidden"
+  >
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="mobile-menu fixed inset-0 z-40 bg-primary/95 backdrop-blur-md flex flex-col items-center justify-center md:hidden"
+    >
+      <button
+        class="absolute top-6 right-6 text-warm text-3xl"
+        onclick="toggleMobileMenu()"
+      >
+        &times;
+      </button>
+      <div class="flex flex-col space-y-8 text-center">
+        <a
+          href="#home"
+          class="text-2xl font-medium text-accent hover:text-warm transition"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="lang-en">Home</span>
+          <span class="lang-es hidden">Inicio</span>
+        </a>
+        <a
+          href="#about"
+          class="text-2xl font-medium text-accent hover:text-warm transition"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="lang-en">About</span>
+          <span class="lang-es hidden">Acerca</span>
+        </a>
+        <a
+          href="#projects"
+          class="text-2xl font-medium text-accent hover:text-warm transition"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="lang-en">Projects</span>
+          <span class="lang-es hidden">Proyectos</span>
+        </a>
+        <a
+          href="#experience"
+          class="text-2xl font-medium text-accent hover:text-warm transition"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="lang-en">Experience</span>
+          <span class="lang-es hidden">Experiencia</span>
+        </a>
+        <a
+          href="#contact"
+          class="text-2xl font-medium text-accent hover:text-warm transition"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="lang-en">Contact</span>
+          <span class="lang-es hidden">Contacto</span>
+        </a>
+      </div>
     </div>
 
-    <!-- Interactive Navbar -->
-    <nav class="relative z-50 py-6 px-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-2xl font-bold text-gradient tracking-tight">.ale<span class="text-xs align-top">P</span></div>
-            <div class="hidden md:flex space-x-1 bg-primary/80 backdrop-blur-sm rounded-full p-1 border border-accent/10 shadow-lg">
-                <a href="#" class="px-6 py-2 rounded-full hover:bg-accent hover:text-primary transition-all duration-300 font-medium group">
-                    <span class="opacity-70 group-hover:opacity-100">01.</span> Home
-                </a>
-                <a href="#" class="px-6 py-2 rounded-full hover:bg-accent hover:text-primary transition-all duration-300 font-medium group">
-                    <span class="opacity-70 group-hover:opacity-100">02.</span> About
-                </a>
-                <a href="#" class="px-6 py-2 rounded-full hover:bg-accent hover:text-primary transition-all duration-300 font-medium group">
-                    <span class="opacity-70 group-hover:opacity-100">03.</span> Projects
-                </a>
-                <a href="#" class="px-6 py-2 rounded-full hover:bg-accent hover:text-primary transition-all duration-300 font-medium group">
-                    <span class="opacity-70 group-hover:opacity-100">04.</span> Experience
-                </a>
-                    <a href="#" class="px-6 py-2 rounded-full hover:bg-accent hover:text-primary transition-all duration-300 font-medium group">
-                    <span class="opacity-70 group-hover:opacity-100">05.</span> Contact
-                </a>
-            </div>
-            <button class="md:hidden text-accent">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute top-20 left-10 w-4 h-4 rounded-full bg-warm animate-float"
+      ></div>
+      <div
+        class="absolute top-1/3 right-20 w-6 h-6 rounded-full bg-secondary opacity-30 animate-float"
+        style="animation-delay: 0.3s"
+      ></div>
+      <div
+        class="absolute bottom-20 left-1/4 w-8 h-8 rounded-full bg-warm opacity-20 animate-float"
+        style="animation-delay: 0.5s"
+      ></div>
+    </div>
+
+    <!-- Fixed Navbar -->
+    <nav
+      id="navbar"
+      class="sticky-nav bg-primary/80 backdrop-blur-sm py-6 px-6 border-b border-warm/10"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div
+          class="text-4xl md:text-5xl font-bold text-gradient tracking-tight"
+        >
+          .ale<span class="text-lg md:text-xl align-top">P</span>
         </div>
+        <div
+          class="hidden md:flex space-x-2 bg-primary/60 backdrop-blur-sm rounded-full p-2 border border-warm/20 shadow-lg"
+        >
+          <a
+            href="#home"
+            class="nav-link px-8 py-3 rounded-full hover:bg-warm hover:text-primary transition-all duration-300 font-medium text-base"
+          >
+            <span class="lang-en">Home</span>
+            <span class="lang-es hidden">Inicio</span>
+          </a>
+          <a
+            href="#about"
+            class="nav-link px-8 py-3 rounded-full hover:bg-warm hover:text-primary transition-all duration-300 font-medium text-base"
+          >
+            <span class="lang-en">About</span>
+            <span class="lang-es hidden">Acerca</span>
+          </a>
+          <a
+            href="#projects"
+            class="nav-link px-8 py-3 rounded-full hover:bg-warm hover:text-primary transition-all duration-300 font-medium text-base"
+          >
+            <span class="lang-en">Projects</span>
+            <span class="lang-es hidden">Proyectos</span>
+          </a>
+          <a
+            href="#experience"
+            class="nav-link px-8 py-3 rounded-full hover:bg-warm hover:text-primary transition-all duration-300 font-medium text-base"
+          >
+            <span class="lang-en">Experience</span>
+            <span class="lang-es hidden">Experiencia</span>
+          </a>
+          <a
+            href="#contact"
+            class="nav-link px-8 py-3 rounded-full hover:bg-warm hover:text-primary transition-all duration-300 font-medium text-base"
+          >
+            <span class="lang-en">Contact</span>
+            <span class="lang-es hidden">Contacto</span>
+          </a>
+        </div>
+
+        <!-- Language Toggle Button -->
+        <div class="hidden md:flex space-x-2 bg-primary/60 backdrop-blur-sm rounded-full p-2 border border-warm/20 shadow-lg">
+          <button
+            id="langToggle"
+            class="px-5 py-3 bg-primary/90 backdrop-blur-sm border-warm/30 rounded-full text-base font-semibold hover:bg-warm/20 hover:border-warm/50 transition-all duration-300"
+          >
+            <span class="lang-en">🇺🇸 EN</span>
+            <span class="lang-es hidden">🇪🇸 ES</span>
+          </button>
+        </div>
+
+        <button
+          class="md:hidden text-warm text-2xl"
+          onclick="toggleMobileMenu()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
     </nav>
 
-    <!-- Hero Section with Animation -->
-    <section class="relative z-10 py-20 px-4 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-float">
-                <span class="text-gradient">Turning ideas</span> 
-                <span class="block mt-2">into digital reality</span>
-            </h1>
-            <p class="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto leading-relaxed">
-                I craft functional solutions through clean code and collaborative development
-            </p>
-            <div class="mt-12 flex justify-center space-x-4">
-                <a href="#about" class="px-8 py-3 bg-accent text-primary rounded-full font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    Explore my work
-                </a>
-                <a href="#contact" class="px-8 py-3 border-2 border-accent text-accent rounded-full font-medium hover:bg-accent/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    Let's connect
-                </a>
-            </div>
+    <!-- Hero Section -->
+    <section id="home" class="relative z-10 py-28 px-6 text-center mt-20">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-6xl md:text-8xl font-bold mb-8 animate-float">
+          <span class="text-gradient lang-en">Turning ideas</span>
+          <span class="text-gradient lang-es hidden">Transformando ideas</span>
+          <span class="block mt-4 lang-en">into digital reality</span>
+          <span class="block mt-4 lang-es hidden">en realidad digital</span>
+        </h1>
+        <p
+          class="text-xl md:text-2xl text-text-light max-w-3xl mx-auto leading-relaxed mb-16"
+        >
+          <span class="lang-en"
+            >I craft functional solutions through clean code and collaborative
+            development</span
+          >
+          <span class="lang-es hidden"
+            >Creo soluciones funcionales con código limpio y desarrollo
+            colaborativo</span
+          >
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+          <a
+            href="#about"
+            class="px-10 py-4 bg-warm text-primary rounded-full font-semibold text-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <span class="lang-en">Explore my work</span>
+            <span class="lang-es hidden">Explora mi trabajo</span>
+          </a>
+          <a
+            href="#contact"
+            class="px-10 py-4 border-2 border-warm text-warm rounded-full font-semibold text-lg hover:bg-warm/10 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <span class="lang-en">Let's connect</span>
+            <span class="lang-es hidden">Conectemos</span>
+          </a>
         </div>
+      </div>
     </section>
 
-    <!-- About Section with Interactive Cards -->
-    <section id="about" class="relative z-10 py-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
-                <span class="text-gradient">About</span> Me
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Profile Card -->
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-primary text-2xl font-bold mr-4">
-                            AP
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold">Alejandro Palma</h3>
-                            <p class="opacity-80">Full Stack Developer</p>
-                        </div>
-                    </div>
-                    <p class="mb-6 leading-relaxed">
-                        Hi, I'm Alejandro. As a passionate Full Stack Developer, I've honed my skills through hands-on projects developed using SCRUM methodology.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">Figma</span>
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">HTML/CSS</span>
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">JAVA</span>
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">Tailwind</span>
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">JavaScript</span>
-                        <span class="px-3 py-1 bg-accent/10 rounded-full text-xs font-medium">MySQL</span>
-                    </div>
-                </div>
-                
-                <!-- Skills Card -->
-                <div class="space-y-6">
-                    <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg card-hover">
-                        <h3 class="text-xl font-bold mb-4">What I Bring</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <span class="text-secondary mr-2">▹</span>
-                                <span>Complete web solutions for diverse sectors</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-secondary mr-2">▹</span>
-                                <span>Collaborative skills from agile teams</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-secondary mr-2">▹</span>
-                                <span>User-centric problem solving</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-secondary mr-2">▹</span>
-                                <span>Quick learning of new technologies</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg card-hover">
-                        <h3 class="text-xl font-bold mb-4">My Approach</h3>
-                        <p class="opacity-90 leading-relaxed">
-                            My projects demonstrate my ability to take concepts from ideation to deployment, and I'm eager to bring this same dedication to my first professional role in tech.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- About Section -->
+    <section id="about" class="relative z-10 py-28 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold mb-20 text-center">
+          <span class="text-gradient lang-en">About</span>
+          <span class="text-gradient lang-es hidden">Acerca de</span>
+          <span class="lang-en">Me</span>
+          <span class="lang-es hidden">Mí</span>
+        </h2>
 
-    <!-- Animated CTA -->
-    <section class="relative z-10 py-20 px-4 text-center bg-gradient-to-r from-secondary/20 to-accent/20 animate-gradient-x">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to build something amazing?</h2>
-            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-                Let's connect and discuss how I can contribute to your next project.
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Profile Card -->
+          <div
+            class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-10 border border-warm/10 shadow-lg card-hover fade-in"
+          >
+            <div class="flex items-center mb-8">
+              <div
+                class="w-20 h-20 rounded-full bg-gradient-to-br from-secondary to-warm flex items-center justify-center text-primary text-3xl font-bold mr-6"
+              >
+                AP
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold text-accent">Alejandro Palma</h3>
+                <p class="text-text-light text-lg">
+                  <span class="lang-en">Full Stack Developer</span>
+                  <span class="lang-es hidden">Desarrollador Full Stack</span>
+                </p>
+              </div>
+            </div>
+            <p class="mb-8 leading-relaxed text-text-light text-lg">
+              <span class="lang-en"
+                >Hi, I'm Alejandro. As a passionate Full Stack Developer, I've
+                honed my skills through hands-on projects developed using SCRUM
+                methodology.</span
+              >
+              <span class="lang-es hidden"
+                >Hola, soy Alejandro. Como desarrollador Full Stack apasionado,
+                he perfeccionado mis habilidades a través de proyectos prácticos
+                desarrollados usando metodología SCRUM.</span
+              >
             </p>
-            <a href="#contact" class="inline-block px-8 py-3 bg-accent text-primary rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
-                Get in touch
-            </a>
+            <div class="flex flex-wrap gap-3">
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >Figma</span
+              >
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >HTML/CSS</span
+              >
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >JAVA</span
+              >
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >Tailwind</span
+              >
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >JavaScript</span
+              >
+              <span
+                class="px-4 py-2 bg-warm/20 text-warm rounded-full text-sm font-medium"
+                >MySQL</span
+              >
+            </div>
+          </div>
+
+          <!-- Skills Card -->
+          <div class="space-y-8">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-10 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <h3 class="text-2xl font-bold mb-6 text-accent">
+                <span class="lang-en">What I Bring</span>
+                <span class="lang-es hidden">Lo que Aporto</span>
+              </h3>
+              <ul class="space-y-4 text-text-light">
+                <li class="flex items-start">
+                  <span class="text-warm mr-3 text-xl">▹</span>
+                  <span class="text-lg lang-en"
+                    >Complete web solutions for diverse sectors</span
+                  >
+                  <span class="text-lg lang-es hidden"
+                    >Soluciones web completas para diversos sectores</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-3 text-xl">▹</span>
+                  <span class="text-lg lang-en"
+                    >Collaborative skills from agile teams</span
+                  >
+                  <span class="text-lg lang-es hidden"
+                    >Habilidades colaborativas de equipos ágiles</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-3 text-xl">▹</span>
+                  <span class="text-lg lang-en"
+                    >User-centric problem solving</span
+                  >
+                  <span class="text-lg lang-es hidden"
+                    >Resolución de problemas centrada en el usuario</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-3 text-xl">▹</span>
+                  <span class="text-lg lang-en"
+                    >Quick learning of new technologies</span
+                  >
+                  <span class="text-lg lang-es hidden"
+                    >Aprendizaje rápido de nuevas tecnologías</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-10 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <h3 class="text-2xl font-bold mb-6 text-accent">
+                <span class="lang-en">My Approach</span>
+                <span class="lang-es hidden">Mi Enfoque</span>
+              </h3>
+              <p class="text-text-light leading-relaxed text-lg">
+                <span class="lang-en"
+                  >My projects demonstrate my ability to take concepts from
+                  ideation to deployment, and I'm eager to bring this same
+                  dedication to my first professional role in tech.</span
+                >
+                <span class="lang-es hidden"
+                  >Mis proyectos demuestran mi capacidad para llevar conceptos
+                  desde la ideación hasta el despliegue, y estoy ansioso por
+                  aportar esta misma dedicación a mi primer rol profesional en
+                  tecnología.</span
+                >
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Projects Section -->
-<section id="projects" class="relative z-10 py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-            <span class="text-gradient">My</span> Projects
+    <section id="projects" class="relative z-10 py-28 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-center">
+          <span class="text-gradient lang-en">My</span>
+          <span class="text-gradient lang-es hidden">Mis</span>
+          <span class="lang-en">Projects</span>
+          <span class="lang-es hidden">Proyectos</span>
         </h2>
-        <p class="text-center max-w-2xl mx-auto mb-16 opacity-90">
-            Explore my work across different development areas
+        <p class="text-center max-w-3xl mx-auto mb-20 text-text-light text-xl">
+          <span class="lang-en"
+            >Explore my work across different development areas</span
+          >
+          <span class="lang-es hidden"
+            >Explora mi trabajo en diferentes áreas de desarrollo</span
+          >
         </p>
 
         <!-- Bento Grid Container -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <!-- Programming Logic Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'logic')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Programming Logic</h3>
-                        <p class="opacity-80 text-sm flex-grow">Algorithms, data structures and problem solving</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">5 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Programming Logic Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'logic')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-logic" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">
+                  <span class="lang-en">Programming Logic</span>
+                  <span class="lang-es hidden">Lógica de Programación</span>
+                </h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en"
+                    >Algorithms and problem solving</span
+                  >
+                  <span class="lang-es hidden"
+                    >Algoritmos, estructuras de datos y resolución de
+                    problemas</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">5 projects</span>
+                    <span class="lang-es hidden">5 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-logic"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
 
-            <!-- Web Development Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'web')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                        <p class="opacity-80 text-sm flex-grow">Interactive and responsive websites</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">3 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+          <!-- Web Development Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'web')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-web" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">
+                  <span class="lang-en">Web Development</span>
+                  <span class="lang-es hidden">Desarrollo Web</span>
+                </h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en"
+                    >Interactive and responsive websites</span
+                  >
+                  <span class="lang-es hidden"
+                    >Sitios web interactivos y responsivos</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">3 projects</span>
+                    <span class="lang-es hidden">3 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-web"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
 
-            <!-- UI/UX Design Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'ui')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
-                        <p class="opacity-80 text-sm flex-grow">Figma prototypes and design systems</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">3 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+          <!-- UI/UX Design Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'ui')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-ui" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">
+                  <span class="lang-en">UI/UX Design</span>
+                  <span class="lang-es hidden">Diseño UI/UX</span>
+                </h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en"
+                    >Figma prototypes and design systems</span
+                  >
+                  <span class="lang-es hidden"
+                    >Prototipos en Figma y sistemas de diseño</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">3 projects</span>
+                    <span class="lang-es hidden">3 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-ui"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
 
-            <!-- Database Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'db')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Database</h3>
-                        <p class="opacity-80 text-sm flex-grow">Data modeling and optimization</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">2 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+          <!-- Database Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'db')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-db" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">
+                  <span class="lang-en">Database</span>
+                  <span class="lang-es hidden">Base de Datos</span>
+                </h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en">Data modeling and optimization</span>
+                  <span class="lang-es hidden"
+                    >Modelado de datos y optimización</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">2 projects</span>
+                    <span class="lang-es hidden">2 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-db"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
 
-            <!-- Backend Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'backend')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Backend</h3>
-                        <p class="opacity-80 text-sm flex-grow">APIs, microservices and server logic</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">2 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+          <!-- Backend Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'backend')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-backend" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">Backend</h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en"
+                    >APIs, microservices and server logic</span
+                  >
+                  <span class="lang-es hidden"
+                    >APIs, microservicios y lógica de servidor</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">2 projects</span>
+                    <span class="lang-es hidden">2 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-backend"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
 
-            <!-- Testing Card -->
-            <div class="relative">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-6 border border-accent/10 shadow-lg card-hover group cursor-pointer"
-                     onclick="toggleSubCards(this, 'testing')">
-                    <div class="flex flex-col h-full">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Testing</h3>
-                        <p class="opacity-80 text-sm flex-grow">Unit, integration and E2E testing</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">3 projects</span>
-                            <span class="text-xs opacity-70 group-hover:opacity-100 transition">View all →</span>
-                        </div>
-                    </div>
+          <!-- Testing Card -->
+          <div class="relative">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg card-hover group cursor-pointer fade-in"
+              onclick="toggleSubCards(this, 'testing')"
+            >
+              <div class="flex flex-col h-full">
+                <div
+                  class="w-16 h-16 rounded-xl bg-warm/20 flex items-center justify-center mb-6"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-warm"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
                 </div>
-                <!-- Sub Cards Container for this category (hidden by default) -->
-                <div id="subCards-testing" class="hidden mt-3 grid grid-cols-1 gap-3 origin-top transition-all duration-300 ease-out"></div>
+                <h3 class="text-2xl font-bold mb-3 text-accent">Testing</h3>
+                <p class="text-text-light text-base flex-grow mb-6">
+                  <span class="lang-en">Unit, integration and E2E testing</span>
+                  <span class="lang-es hidden"
+                    >Pruebas unitarias, de integración y E2E</span
+                  >
+                </p>
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-sm py-2 px-3 bg-warm/20 text-warm rounded-full"
+                  >
+                    <span class="lang-en">3 projects</span>
+                    <span class="lang-es hidden">3 proyectos</span>
+                  </span>
+                  <span
+                    class="text-sm text-text-light group-hover:text-warm transition"
+                  >
+                    <span class="lang-en">View all →</span>
+                    <span class="lang-es hidden">Ver todos →</span>
+                  </span>
+                </div>
+              </div>
             </div>
+            <div
+              id="subCards-testing"
+              class="hidden mt-4 grid grid-cols-1 gap-4 origin-top transition-all duration-300 ease-out"
+            ></div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Experience & Education Section -->
-<section id="experience" class="relative z-10 py-20 px-4">
-    <div class="max-w-6xl mx-auto">
+    <section id="experience" class="relative z-10 py-20 px-4">
+      <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
-            <span class="text-gradient">Journey</span> & Expertise
+          <span class="text-gradient lang-en">Journey</span>
+          <span class="text-gradient lang-es hidden">Trayectoria</span>
+          <span class="lang-en">& Expertise</span>
+          <span class="lang-es hidden">y Experiencia</span>
         </h2>
-        
+
         <div class="grid md:grid-cols-2 gap-8">
-            <!-- Education Column -->
-            <div>
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                    </svg>
-                    Education
-                </h3>
-                
-                <!-- Environmental Engineering -->
-                <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-6 mb-4 border border-accent/10 shadow-lg card-hover">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-bold text-lg">Environmental and Sanitary Engineering</h4>
-                            <p class="text-sm opacity-80">University of [Tu Universidad]</p>
-                        </div>
-                        <span class="text-xs py-1 px-2 bg-secondary/20 text-secondary rounded-full">2017 - 2024</span>
-                    </div>
-                    <p class="mt-3 text-sm opacity-90">
-                        Comprehensive training in environmental management, water treatment, and sustainable development.
-                    </p>
+          <!-- Education Column -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6 flex items-center text-accent">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 mr-3 text-warm"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path
+                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                />
+              </svg>
+              <span class="lang-en">Education</span>
+              <span class="lang-es hidden">Educación</span>
+            </h3>
+
+            <!-- Environmental Engineering -->
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 mb-4 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-bold text-lg text-accent">
+                    <span class="lang-en"
+                      >Environmental and Sanitary Engineering</span
+                    >
+                    <span class="lang-es hidden"
+                      >Ingeniería Ambiental y Sanitaria</span
+                    >
+                  </h4>
+                  <p class="text-sm text-text-light">
+                    <span class="lang-en">University of Magdalena</span>
+                    <span class="lang-es hidden"
+                      >Universidad del Magdalena</span
+                    >
+                  </p>
                 </div>
-                
-                <!-- Full Stack Bootcamp -->
-                <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-6 border border-accent/10 shadow-lg card-hover">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-bold text-lg">Full Stack Java Developer</h4>
-                            <p class="text-sm opacity-80">Bootcamp</p>
-                        </div>
-                        <span class="text-xs py-1 px-2 bg-secondary/20 text-secondary rounded-full">May 2025 - Sep 2025</span>
-                    </div>
-                    <p class="mt-3 text-sm opacity-90">
-                        Intensive training in modern web development with Java, Spring Boot, React, and agile methodologies.
-                    </p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">Java</span>
-                        <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">Spring Boot</span>
-                        <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">React</span>
-                        <span class="text-xs py-1 px-2 bg-accent/10 rounded-full">SCRUM</span>
-                    </div>
-                </div>
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                  >2017 - 2024</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-text-light">
+                <span class="lang-en"
+                  >Comprehensive training in environmental management, water
+                  treatment, and sustainable development.</span
+                >
+                <span class="lang-es hidden"
+                  >Formación integral en gestión ambiental, tratamiento de aguas
+                  y desarrollo sostenible.</span
+                >
+              </p>
             </div>
-            
-            <!-- Work Experience Column -->
-            <div>
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Professional Experience
-                </h3>
-                
-                <!-- Junior Professional -->
-                <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-6 mb-4 border border-accent/10 shadow-lg card-hover">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-bold text-lg">Junior Professional</h4>
-                            <p class="text-sm opacity-80">Cafam - Family Compensation Fund</p>
-                        </div>
-                        <span class="text-xs py-1 px-2 bg-secondary/20 text-secondary rounded-full">May 2024 - Apr 2025</span>
-                    </div>
-                    <ul class="mt-3 space-y-2 text-sm opacity-90">
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Development and implementation of environmental management systems</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Coordination of sustainability projects</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Technical reports and regulatory compliance</span>
-                        </li>
-                    </ul>
+
+            <!-- Full Stack Bootcamp -->
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-bold text-lg text-accent">
+                    <span class="lang-en">Full Stack Java Developer</span>
+                    <span class="lang-es hidden"
+                      >Desarrollador Full Stack Java</span
+                    >
+                  </h4>
+                  <p class="text-sm text-text-light">Bootcamp</p>
                 </div>
-                
-                <!-- Internship -->
-                <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-6 border border-accent/10 shadow-lg card-hover">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-bold text-lg">Practicing Professional</h4>
-                            <p class="text-sm opacity-80">Cafam - Family Compensation Fund</p>
-                        </div>
-                        <span class="text-xs py-1 px-2 bg-secondary/20 text-secondary rounded-full">Sep 2023 - Mar 2025</span>
-                    </div>
-                    <ul class="mt-3 space-y-2 text-sm opacity-90">
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Support in environmental impact assessments</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Participation in waste management programs</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-secondary mr-2">▹</span>
-                            <span>Data collection and analysis for sustainability reports</span>
-                        </li>
-                    </ul>
-                </div>
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                >
+                  <span class="lang-en">May 2025 - Sep 2025</span>
+                  <span class="lang-es hidden">May 2025 - Sep 2025</span>
+                </span>
+              </div>
+              <p class="mt-3 text-sm text-text-light">
+                <span class="lang-en"
+                  >Intensive training in modern web development with Java,
+                  Spring Boot, React, and agile methodologies.</span
+                >
+                <span class="lang-es hidden"
+                  >Entrenamiento intensivo en desarrollo web moderno con Java,
+                  Spring Boot, React y metodologías ágiles.</span
+                >
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                  >Java</span
+                >
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                  >Spring Boot</span
+                >
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                  >React</span
+                >
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                  >SCRUM</span
+                >
+              </div>
             </div>
+          </div>
+
+          <!-- Work Experience Column -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6 flex items-center text-accent">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 mr-3 text-warm"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <span class="lang-en">Professional Experience</span>
+              <span class="lang-es hidden">Experiencia Profesional</span>
+            </h3>
+
+            <!-- Junior Professional -->
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 mb-4 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-bold text-lg text-accent">
+                    <span class="lang-en">Junior Professional</span>
+                    <span class="lang-es hidden">Profesional Junior</span>
+                  </h4>
+                  <p class="text-sm text-text-light">
+                    <span class="lang-en"
+                      >Cafam - Family Compensation Fund</span
+                    >
+                    <span class="lang-es hidden"
+                      >Cafam - Caja de Compensación Familiar</span
+                    >
+                  </p>
+                </div>
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                >
+                  <span class="lang-en">May 2024 - Apr 2025</span>
+                  <span class="lang-es hidden">May 2024 - Abr 2025</span>
+                </span>
+              </div>
+              <ul class="mt-3 space-y-2 text-sm text-text-light">
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Development and implementation of environmental management
+                    systems</span
+                  >
+                  <span class="lang-es hidden"
+                    >Desarrollo e implementación de sistemas de gestión
+                    ambiental</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Coordination of sustainability projects</span
+                  >
+                  <span class="lang-es hidden"
+                    >Coordinación de proyectos de sostenibilidad</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Technical reports and regulatory compliance</span
+                  >
+                  <span class="lang-es hidden"
+                    >Informes técnicos y cumplimiento normativo</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Internship -->
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-warm/10 shadow-lg card-hover fade-in"
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-bold text-lg text-accent">
+                    <span class="lang-en">Practicing Professional</span>
+                    <span class="lang-es hidden">Profesional en Práctica</span>
+                  </h4>
+                  <p class="text-sm text-text-light">
+                    <span class="lang-en"
+                      >Cafam - Family Compensation Fund</span
+                    >
+                    <span class="lang-es hidden"
+                      >Cafam - Caja de Compensación Familiar</span
+                    >
+                  </p>
+                </div>
+                <span
+                  class="text-xs py-1 px-2 bg-warm/20 text-warm rounded-full"
+                >
+                  <span class="lang-en">Sep 2023 - Mar 2025</span>
+                  <span class="lang-es hidden">Sep 2023 - Mar 2025</span>
+                </span>
+              </div>
+              <ul class="mt-3 space-y-2 text-sm text-text-light">
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Support in environmental impact assessments</span
+                  >
+                  <span class="lang-es hidden"
+                    >Apoyo en evaluaciones de impacto ambiental</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Participation in waste management programs</span
+                  >
+                  <span class="lang-es hidden"
+                    >Participación en programas de gestión de residuos</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-warm mr-2">▹</span>
+                  <span class="lang-en"
+                    >Data collection and analysis for sustainability
+                    reports</span
+                  >
+                  <span class="lang-es hidden"
+                    >Recolección y análisis de datos para informes de
+                    sostenibilidad</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
+
         <!-- Transition Note -->
         <div class="mt-16 text-center max-w-3xl mx-auto">
-            <div class="bg-primary/50 backdrop-blur-md rounded-2xl p-6 border border-accent/10 shadow-lg">
-                <h3 class="text-xl font-bold mb-3">From Environmental Engineering to Tech</h3>
-                <p class="opacity-90">
-                    My background in environmental engineering has equipped me with strong analytical and problem-solving skills, 
-                    which I now apply to software development. The transition reflects my passion for creating solutions that 
-                    combine technical excellence with positive impact.
-                </p>
-            </div>
+          <div
+            class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-warm/10 shadow-lg fade-in"
+          >
+            <h3 class="text-xl font-bold mb-3 text-accent">
+              <span class="lang-en"
+                >From Environmental Engineering to Tech</span
+              >
+              <span class="lang-es hidden"
+                >De Ingeniería Ambiental a Tecnología</span
+              >
+            </h3>
+            <p class="text-text-light">
+              <span class="lang-en"
+                >My background in environmental engineering has equipped me with
+                strong analytical and problem-solving skills, which I now apply
+                to software development. The transition reflects my passion for
+                creating solutions that combine technical excellence with
+                positive impact.</span
+              >
+              <span class="lang-es hidden"
+                >Mi formación en ingeniería ambiental me ha equipado con sólidas
+                habilidades analíticas y de resolución de problemas, que ahora
+                aplico al desarrollo de software. La transición refleja mi
+                pasión por crear soluciones que combinen excelencia técnica con
+                impacto positivo.</span
+              >
+            </p>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Contact Section -->
-<section id="contact" class="relative z-10 py-20 px-4">
-    <div class="max-w-4xl mx-auto">
+    <!-- Contact Section -->
+    <section id="contact" class="relative z-10 py-20 px-4">
+      <div class="max-w-4xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-            <span class="text-gradient">Get in</span> Touch
+          <span class="text-gradient lang-en">Get in</span>
+          <span class="text-gradient lang-es hidden">Ponte en</span>
+          <span class="lang-en">Touch</span>
+          <span class="lang-es hidden">Contacto</span>
         </h2>
-        <p class="text-center max-w-2xl mx-auto mb-16 opacity-90">
-            Let's collaborate on your next project or discuss opportunities
+        <p class="text-center max-w-2xl mx-auto mb-16 text-text-light">
+          <span class="lang-en"
+            >Let's collaborate on your next project or discuss
+            opportunities</span
+          >
+          <span class="lang-es hidden"
+            >Colaboremos en tu próximo proyecto o hablemos de
+            oportunidades</span
+          >
         </p>
 
         <div class="grid md:grid-cols-2 gap-8">
-            <!-- Contact Form -->
-            <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg">
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-sm font-medium mb-2">Full Name</label>
-                        <input type="text" id="name" name="name" required 
-                               class="w-full px-4 py-3 bg-primary/30 border border-accent/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition">
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" required 
-                               class="w-full px-4 py-3 bg-primary/30 border border-accent/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition">
-                    </div>
-                    
-                    <div>
-                        <label for="country" class="block text-sm font-medium mb-2">Country</label>
-                        <input type="text" id="country" name="country" required 
-                               class="w-full px-4 py-3 bg-primary/30 border border-accent/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition">
-                    </div>
-                    
-                    <div>
-                        <label for="projectType" class="block text-sm font-medium mb-2">Project Type</label>
-                        <select id="projectType" name="projectType" required
-                                class="w-full px-4 py-3 bg-primary/30 border border-accent/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent appearance-none transition">
-                            <option value="" disabled selected>Select an option</option>
-                            <option value="Frontend Development">Frontend Development</option>
-                            <option value="Backend Development">Backend Development</option>
-                            <option value="Full Stack Project">Full Stack Project</option>
-                            <option value="UI/UX Design">UI/UX Design</option>
-                            <option value="Database Design">Database Design</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="4"
-                                  class="w-full px-4 py-3 bg-primary/30 border border-accent/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full py-3 px-6 bg-secondary text-primary rounded-xl font-medium hover:bg-accent hover:text-primary transition duration-300 flex items-center justify-center">
-                        Send Message
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                    </button>
-                </form>
-                
-                <div id="formSuccess" class="hidden mt-4 p-4 bg-green-500/10 text-green-500 rounded-xl text-center">
-                    Message sent successfully! I'll contact you soon.
-                </div>
-                
-                <div id="formError" class="hidden mt-4 p-4 bg-red-500/10 text-red-500 rounded-xl text-center">
-                    Error sending message. Please try again later.
-                </div>
+          <!-- Contact Form -->
+          <div
+            class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg fade-in"
+          >
+            <form id="contactForm" class="space-y-6">
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-medium mb-2 text-accent"
+                >
+                  <span class="lang-en">Full Name</span>
+                  <span class="lang-es hidden">Nombre Completo</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 bg-slate-700/50 border border-warm/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm focus:border-transparent transition text-accent"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium mb-2 text-accent"
+                >
+                  <span class="lang-en">Email</span>
+                  <span class="lang-es hidden">Correo Electrónico</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 bg-slate-700/50 border border-warm/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm focus:border-transparent transition text-accent"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="country"
+                  class="block text-sm font-medium mb-2 text-accent"
+                >
+                  <span class="lang-en">Country</span>
+                  <span class="lang-es hidden">País</span>
+                </label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  required
+                  class="w-full px-4 py-3 bg-slate-700/50 border border-warm/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm focus:border-transparent transition text-accent"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="projectType"
+                  class="block text-sm font-medium mb-2 text-accent"
+                >
+                  <span class="lang-en">Project Type</span>
+                  <span class="lang-es hidden">Tipo de Proyecto</span>
+                </label>
+                <select
+                  id="projectType"
+                  name="projectType"
+                  required
+                  class="w-full px-4 py-3 bg-slate-700/50 border border-warm/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm focus:border-transparent appearance-none transition text-accent"
+                >
+                  <option value="" disabled selected class="lang-en">
+                    Select an option
+                  </option>
+                  <option value="" disabled selected class="lang-es hidden">
+                    Selecciona una opción
+                  </option>
+                  <option value="Frontend Development" class="lang-en">
+                    Frontend Development
+                  </option>
+                  <option value="Desarrollo Frontend" class="lang-es hidden">
+                    Desarrollo Frontend
+                  </option>
+                  <option value="Backend Development" class="lang-en">
+                    Backend Development
+                  </option>
+                  <option value="Desarrollo Backend" class="lang-es hidden">
+                    Desarrollo Backend
+                  </option>
+                  <option value="Full Stack Project" class="lang-en">
+                    Full Stack Project
+                  </option>
+                  <option value="Proyecto Full Stack" class="lang-es hidden">
+                    Proyecto Full Stack
+                  </option>
+                  <option value="UI/UX Design" class="lang-en">
+                    UI/UX Design
+                  </option>
+                  <option value="Diseño UI/UX" class="lang-es hidden">
+                    Diseño UI/UX
+                  </option>
+                  <option value="Database Design" class="lang-en">
+                    Database Design
+                  </option>
+                  <option
+                    value="Diseño de Base de Datos"
+                    class="lang-es hidden"
+                  >
+                    Diseño de Base de Datos
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  for="message"
+                  class="block text-sm font-medium mb-2 text-accent"
+                >
+                  <span class="lang-en">Message</span>
+                  <span class="lang-es hidden">Mensaje</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  class="w-full px-4 py-3 bg-slate-700/50 border border-warm/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm focus:border-transparent transition text-accent"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full py-3 px-6 bg-warm text-primary rounded-xl font-medium hover:bg-orange-400 transition duration-300 flex items-center justify-center"
+              >
+                <span class="lang-en">Send Message</span>
+                <span class="lang-es hidden">Enviar Mensaje</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            <div
+              id="formSuccess"
+              class="hidden mt-4 p-4 bg-green-500/10 text-green-400 rounded-xl text-center"
+            >
+              <span class="lang-en"
+                >Message sent successfully! I'll contact you soon.</span
+              >
+              <span class="lang-es hidden"
+                >¡Mensaje enviado con éxito! Te contactaré pronto.</span
+              >
             </div>
-            
-            <!-- Contact Info -->
-            <div class="space-y-6">
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg">
-                    <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        Email Me
-                    </h3>
-                    <a href="mailto:alejandropalmaa@outlook.com" class="opacity-90 hover:opacity-100 hover:text-secondary transition">alejandropalmaa@outlook.com</a>
-                </div>
-                
-                
-                <div class="bg-primary/50 backdrop-blur-md rounded-3xl p-8 border border-accent/10 shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                        </svg>
-                        Connect With Me
-                    </h3>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center hover:bg-secondary hover:text-primary transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                            </svg>
-                        </a>
-                        <a href="www.linkedin.com/in/alejandro-palma-a-pmo" class="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center hover:bg-secondary hover:text-primary transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.432.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/Alep9923" class="w-10 h-10 rounded-full bg-primary/30 flex items-center justify-center hover:bg-secondary hover:text-primary transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+
+            <div
+              id="formError"
+              class="hidden mt-4 p-4 bg-red-500/10 text-red-400 rounded-xl text-center"
+            >
+              <span class="lang-en"
+                >Error sending message. Please try again later.</span
+              >
+              <span class="lang-es hidden"
+                >Error al enviar mensaje. Por favor intenta más tarde.</span
+              >
             </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="space-y-6">
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg fade-in"
+            >
+              <h3 class="text-xl font-bold mb-6 flex items-center text-accent">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2 text-warm"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <span class="lang-en">Email Me</span>
+                <span class="lang-es hidden">Envíame un Email</span>
+              </h3>
+              <a
+                href="mailto:alejandropalmaa@outlook.com"
+                class="text-text-light hover:text-warm transition"
+                >alejandropalmaa@outlook.com</a
+              >
+            </div>
+
+            <div
+              class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 border border-warm/10 shadow-lg fade-in"
+            >
+              <h3 class="text-xl font-bold mb-4 flex items-center text-accent">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2 text-warm"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                  />
+                </svg>
+                <span class="lang-en">Connect With Me</span>
+                <span class="lang-es hidden">Conecta Conmigo</span>
+              </h3>
+              <div class="flex space-x-4 mt-4">
+                <a
+                  href="#"
+                  class="w-10 h-10 rounded-full bg-slate-700/50 flex items-center justify-center hover:bg-warm hover:text-primary transition"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.280.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://linkedin.com/in/alejandro-palma-a-pmo"
+                  class="w-10 h-10 rounded-full bg-slate-700/50 flex items-center justify-center hover:bg-warm hover:text-primary transition"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.432.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/Alep9923"
+                  class="w-10 h-10 rounded-full bg-slate-700/50 flex items-center justify-center hover:bg-warm hover:text-primary transition"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<footer class="bg-primary/50 backdrop-blur-md py-6 mt-16">
-    <div class="max-w-6xl mx-auto text-center text-sm opacity-80">
-        © 2025 Alejandro Palma. All rights reserved.
-    </div>
+    <footer class="bg-slate-800/50 backdrop-blur-md py-6 mt-16">
+      <div class="max-w-6xl mx-auto text-center text-sm text-text-light">
+        © 2025 Alejandro Palma.
+        <span class="lang-en">All rights reserved.</span>
+        <span class="lang-es hidden">Todos los derechos reservados.</span>
+      </div>
+    </footer>
 
-<script src="script.js"></script>
-
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
